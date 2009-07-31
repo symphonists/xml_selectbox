@@ -257,14 +257,12 @@
 		
 		function createTable(){
 			return $this->_engine->Database->query(
-			
 				"CREATE TABLE IF NOT EXISTS `tbl_entries_data_" . $this->get('id') . "` (
 				  `id` int(11) unsigned NOT NULL auto_increment,
 				  `entry_id` int(11) unsigned NOT NULL,
 				  `value` varchar(255) default NULL,
 				  PRIMARY KEY  (`id`),
 				  KEY `entry_id` (`entry_id`),
-				  KEY `handle` (`handle`),
 				  KEY `value` (`value`)
 				) TYPE=MyISAM;"
 			
