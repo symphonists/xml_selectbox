@@ -113,9 +113,12 @@
 			return $options;			
 		}
 		
-		function getSelectedLabels($data) {
+		function getSelectedLabels($data = null) {
 			$states = $this->getValuesFromXML();
 			$selected = array();
+			
+			if(!is_array($data['value'])) $data['value'] = array($data['value']);
+			
 			foreach($states as $state){
 				if (in_array($state['value'], $data['value'])) $selected[$state['value']] = $state['text'];
 			}
