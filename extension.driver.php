@@ -25,6 +25,7 @@
 			  `item_xpath` varchar(255) NOT NULL default '',
 			  `text_xpath` varchar(255) NOT NULL,
 			  `value_xpath` varchar(255) default NULL,
+			  `cache` int(11) NOT NULL default 0,
 			  PRIMARY KEY (`id`)
 			) TYPE=MyISAM");
 		}

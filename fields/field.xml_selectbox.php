@@ -43,38 +43,34 @@
 		function getValuesFromXML() {
 			
 			$xml_location = $this->get('xml_location');
+			$cache_life = (int) $this->get('cache');
 			
 			if (General::validateURL($xml_location) != '') {
 				// is a URL, check cache
-				
-				$cache_id = md5($xml_location);
+								
+				$cache_id = md5('xml_selectbox_' . $xml_location);
 				$cache = new Cacheable($this->_Parent->_Parent->Database);
 				$cachedData = $cache->check($cache_id);
-				$creation = DateTimeObj::get('c');
-				
-				if(!$cachedData || (time() - $cachedData['creation']) > (5 * 60)) {
-
-					if(Mutex::acquire($cache_id, 6, TMP)){
-
+			
+			
+				if(!$cachedData) {
+					
 						$ch = new Gateway;
 						$ch->init();
 						$ch->setopt('URL', $xml_location);
 						$ch->setopt('TIMEOUT', 6);
 						$xml = $ch->exec();
 						$writeToCache = true;
-
-						Mutex::release($cache_id, TMP);
+						
+						$cache->write($cache_id, $xml, $cache_life); // Cache life is in minutes not seconds e.g. 2 = 2 minutes
 
 						$xml = trim($xml);
 						if (empty($xml) && $cachedData) $xml = $cachedData['data'];
-						
-					} elseif ($cachedData){ 
-						$xml = $cachedData['data'];
-					}
 					
-				} else {
+				} else {					
 					$xml = $cachedData['data'];
 				}
+				exit;
 				
 				$xml = simplexml_load_string($xml);
 				
@@ -197,10 +193,11 @@
 			$fields = array();
 			
 			$fields['field_id'] = $id;
-			if($this->get('xml_location') != '') $fields['xml_location'] = $this->get('xml_location');
+			if($this->get('xml_location') != '') $fields['xml_location'] = $this->get('xml_location');			
 			if($this->get('item_xpath') != '') $fields['item_xpath'] = $this->get('item_xpath');
 			if($this->get('text_xpath') != '') $fields['text_xpath'] = $this->get('text_xpath');
 			if($this->get('value_xpath') != '') $fields['value_xpath'] = $this->get('value_xpath');
+			if($this->get('cache') != '') $fields['cache'] = $this->get('cache');
 			$fields['allow_multiple_selection'] = ($this->get('allow_multiple_selection') ? $this->get('allow_multiple_selection') : 'no');
 
 			$this->Database->query("DELETE FROM `tbl_fields_".$this->handle()."` WHERE `field_id` = '$id' LIMIT 1");
@@ -234,18 +231,30 @@
 			
 			$div = new XMLElement('div', NULL, array('class' => 'group'));
 			
-			$label = Widget::Label(__('Text value (XPath)'));
-			$input = Widget::Input('fields['.$this->get('sortorder').'][text_xpath]', General::sanitize($this->get('text_xpath')));
-			$label->appendChild($input);
-			$div->appendChild($label);
-			
 			$label = Widget::Label(__('Value (XPath)'));
 			$label->appendChild(new XMLElement('i', __('Optional')));
 			$input = Widget::Input('fields['.$this->get('sortorder').'][value_xpath]', General::sanitize($this->get('value_xpath')));
 			$label->appendChild($input);
 			$div->appendChild($label);
 			
+			$label = Widget::Label(__('Label (XPath)'));
+			$input = Widget::Input('fields['.$this->get('sortorder').'][text_xpath]', General::sanitize($this->get('text_xpath')));
+			$label->appendChild($input);
+			$div->appendChild($label);
+			
 			$wrapper->appendChild($div);
+			
+			## Cached time input
+			$div = new XMLElement('div', NULL, array('class' => 'group'));
+			
+			$label = Widget::Label();
+			$input = Widget::Input('fields['.$this->get('sortorder').'][cache]', max(1, intval($fields[$this->get('sortorder')]['cache'])), NULL, array('size' => '6'));
+			$label->setValue('Update cached result every ' . $input->generate(false) . ' minutes');
+			if(isset($this->_errors[$this->get('sortorder')]['cache'])) $div->appendChild(Widget::wrapFormElementWithError($label, $this->_errors[$this->get('sortorder')]['cache']));
+			else $div->appendChild($label);
+			
+			$wrapper->appendChild($div);
+			
 			
 			## Allow selection of multiple items
 			$label = Widget::Label();
