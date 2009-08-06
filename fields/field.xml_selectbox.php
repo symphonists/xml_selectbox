@@ -247,8 +247,8 @@
 			$div = new XMLElement('div', NULL, array('class' => 'group'));
 			
 			$label = Widget::Label();
-			$input = Widget::Input('fields['.$this->get('sortorder').'][cache]', max(1, intval($fields[$this->get('sortorder')]['cache'])), NULL, array('size' => '6'));
-			$label->setValue('Update cached result every ' . $input->generate(false) . ' minutes');
+			$input = Widget::Input('fields['.$this->get('sortorder').'][cache]', max(1, intval($this->get('cache'))), NULL, array('size' => '6'));
+			$label->setValue('Update cached result every ' . $input->generate() . ' minutes');
 			if(isset($this->_errors[$this->get('sortorder')]['cache'])) $div->appendChild(Widget::wrapFormElementWithError($label, $this->_errors[$this->get('sortorder')]['cache']));
 			else $div->appendChild($label);
 			
