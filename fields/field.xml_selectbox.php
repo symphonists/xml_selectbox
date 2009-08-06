@@ -70,7 +70,6 @@
 				} else {					
 					$xml = $cachedData['data'];
 				}
-				exit;
 				
 				$xml = simplexml_load_string($xml);
 				
