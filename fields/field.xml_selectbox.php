@@ -45,7 +45,9 @@
 			$xml_location = $this->get('xml_location');
 			$cache_life = (int) $this->get('cache');
 			
-			if (General::validateURL($xml_location) != '') {
+			require_once(TOOLKIT . '/util.validators.php');
+						
+			if (preg_match($validators['URI'], $xml_location)) {
 				// is a URL, check cache
 								
 				$cache_id = md5('xml_selectbox_' . $xml_location);
