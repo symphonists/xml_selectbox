@@ -4,8 +4,8 @@
 	
 		public function about(){
 			return array('name' => 'Field: XML Select Box',
-						 'version' => '0.3',
-						 'release-date' => '2009-08-12',
+						 'version' => '0.3.1',
+						 'release-date' => '2009-09-07',
 						 'author' => array('name' => 'Nick Dunn',
 										   'website' => 'http://nick-dunn.co.uk',
 										   'email' => 'nick@nick-dunn.co.uk')
