@@ -45,7 +45,7 @@
 			$xml_location = $this->get('xml_location');
 			$cache_life = (int) $this->get('cache');
 			
-			require_once(TOOLKIT . '/util.validators.php');
+			require(TOOLKIT . '/util.validators.php');
 						
 			if (preg_match($validators['URI'], $xml_location)) {
 				// is a URL, check cache
