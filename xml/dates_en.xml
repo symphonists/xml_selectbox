@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<weekdays>
-	<day handle="01">Sunday</day>
-	<day handle="02">Monday</day>
-	<day handle="03">Tuesday</day>
-	<day handle="04">Wednesday</day>
-	<day handle="05">Thursday</day>
-	<day handle="06">Friday</day>
-	<day handle="07">Saturday</day>
-</weekdays>
-<months>
-	<month handle="01">January</month>
-	<month handle="02">February</month>
-	<month handle="03">March</month>
-	<month handle="04">April</month>
-	<month handle="05">May</month>
-	<month handle="06">June</month>
-	<month handle="07">July</month>
-	<month handle="08">August</month>
-	<month handle="09">September</month>
-	<month handle="10">October</month>
-	<month handle="11">November</month>
-	<month handle="12">December</month>
-</months>
+<calendar>
+	<weekdays>
+		<day handle="01">Sunday</day>
+		<day handle="02">Monday</day>
+		<day handle="03">Tuesday</day>
+		<day handle="04">Wednesday</day>
+		<day handle="05">Thursday</day>
+		<day handle="06">Friday</day>
+		<day handle="07">Saturday</day>
+	</weekdays>
+	<months>
+		<month handle="01">January</month>
+		<month handle="02">February</month>
+		<month handle="03">March</month>
+		<month handle="04">April</month>
+		<month handle="05">May</month>
+		<month handle="06">June</month>
+		<month handle="07">July</month>
+		<month handle="08">August</month>
+		<month handle="09">September</month>
+		<month handle="10">October</month>
+		<month handle="11">November</month>
+		<month handle="12">December</month>
+	</months>
+</calendar>
