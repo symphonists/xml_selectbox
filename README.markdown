@@ -38,10 +38,10 @@ The "Item" option accepts an XPath expression. Each selected node is used to cre
 
 By means of example, you would use this configuration for a list of countries (XML file included with this extension):
 
-XML Location: countries_en.xml
-Item: //country
-Value: @abbr
-Label: text()
+XML Location: `countries_en.xml`  
+Item: `//country`  
+Value: `@abbr`  
+Label: `text()`
 
 ### Caching
 
