@@ -1,7 +1,7 @@
 # Field: XML Select Box
 
-* Version: 0.3.2
-* Build Date: 2010-05-08
+* Version: 0.3.3
+* Build Date: 2010-06-02
 * Requirements: Symphony 2.0.2
 * Authors:
 	- Nick Dunn <http://github.com/nickdunn/>
@@ -30,7 +30,7 @@ XML sources can be loaded into the field in three ways using the "XML Location" 
 
 1. Using the commonly-used XML files that come with the field. Simply enter the name of the XML file, e.g. `countries_en.xml`
 2. Referencing a local XML file in your Symphony site. Prefix the XML path with a forward-slash to locate a file inside your web root e.g. `/workspace/xml/foo.xml` or `/assets/bar.xml`
-3. Use the URL of a valid XML source e.g. `http://nick-dunn.co.uk/rss/`
+3. Use the URL of a valid XML source e.g. `http://nick-dunn.co.uk/rss/`. This string can contain params `{$root}` and `{$workspace}` for local URLs.
 
 ### Selecting data from the XML
 
