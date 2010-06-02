@@ -46,7 +46,11 @@
 			$cache_life = (int) $this->get('cache');
 			
 			require(TOOLKIT . '/util.validators.php');
-						
+			
+			// allow use of choice params in URL
+			$xml_location = preg_replace('/{\$root}/', URL, $xml_location);
+			$xml_location = preg_replace('/{\$workspace}/', WORKSPACE, $xml_location);
+			
 			if (preg_match($validators['URI'], $xml_location)) {
 				// is a URL, check cache
 								
