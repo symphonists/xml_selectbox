@@ -83,12 +83,10 @@
 				$xml = simplexml_load_file(EXTENSIONS . '/xml_selectbox/xml/' . $this->get('xml_location'));
 			}
 			
-			if (!$xml) return;
+			$options = array();
+			if (!$xml) return $options;
 			
 			$items = $xml->xpath($this->get('item_xpath'));
-			
-			$options = array();
-			
 			foreach($items as $item) {
 				
 				$option = array();
