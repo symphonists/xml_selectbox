@@ -43,7 +43,7 @@
 		function getValuesFromXML() {
 			
 			$xml_location = $this->get('xml_location');
-			$cache_life = (int) $this->get('cache');
+			$cache_life = (int)$this->get('cache');
 			
 			require(TOOLKIT . '/util.validators.php');
 			
@@ -53,11 +53,10 @@
 			
 			if (preg_match($validators['URI'], $xml_location)) {
 				// is a URL, check cache
-								
+							
 				$cache_id = md5('xml_selectbox_' . $xml_location);
-				$cache = new Cacheable($this->_Parent->_Parent->Database);
+				$cache = new Cacheable(Symphony::Database());
 				$cachedData = $cache->check($cache_id);
-			
 			
 				if(!$cachedData) {
 					
@@ -251,7 +250,7 @@
 			$div = new XMLElement('div', NULL, array('class' => 'group'));
 			
 			$label = Widget::Label();
-			$input = Widget::Input('fields['.$this->get('sortorder').'][cache]', max(1, intval($this->get('cache'))), NULL, array('size' => '6'));
+			$input = Widget::Input('fields['.$this->get('sortorder').'][cache]', max(0, intval($this->get('cache'))), NULL, array('size' => '6'));
 			$label->setValue('Update cached result every ' . $input->generate() . ' minutes');
 			if(isset($this->_errors[$this->get('sortorder')]['cache'])) $div->appendChild(Widget::wrapFormElementWithError($label, $this->_errors[$this->get('sortorder')]['cache']));
 			else $div->appendChild($label);

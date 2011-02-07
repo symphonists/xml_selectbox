@@ -4,20 +4,19 @@
 	
 		public function about(){
 			return array('name' => 'Field: XML Select Box',
-						 'version' => '0.3.3',
-						 'release-date' => '2010-06-02',
+						 'version' => '0.3.4',
+						 'release-date' => '2011-02-07',
 						 'author' => array('name' => 'Nick Dunn',
-										   'website' => 'http://nick-dunn.co.uk',
-										   'email' => 'nick@nick-dunn.co.uk')
+										   'website' => 'http://nick-dunn.co.uk')
 				 		);
 		}
 		
 		public function uninstall(){
-			$this->_Parent->Database->query("DROP TABLE `tbl_fields_xml_selectbox`");
+			Symphony::Database()->query("DROP TABLE `tbl_fields_xml_selectbox`");
 		}
 
 		public function install(){
-			return $this->_Parent->Database->query("CREATE TABLE `tbl_fields_xml_selectbox` (
+			return Symphony::Database()->query("CREATE TABLE `tbl_fields_xml_selectbox` (
 			  `id` int(11) NOT NULL auto_increment,
 			  `field_id` int(11) NOT NULL,
 			  `allow_multiple_selection` enum('yes','no') NOT NULL default 'no',
