@@ -1,13 +1,5 @@
 # Field: XML Select Box
 
-* Version: 0.3.4
-* Build Date: 2011-02-07
-* Requirements: Symphony 2.2
-* Authors:
-	- Nick Dunn <http://github.com/nickdunn/>
-	- Richard Warrender <http://github.com/rwarrender>
-	- Tony Arnold <http://github.com/tonyarnold>
-
 ## Installation
 
 1. Download and upload the 'xml_selectbox' folder to your Symphony 'extensions' folder.
