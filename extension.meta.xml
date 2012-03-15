@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<extension id="xml_selectbox">
+<extension id="xml_selectbox" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>XML Select Box</name>
 	<description>A select box populated from an XML file.</description>
 	<repo type="github">https://github.com/nickdunn/xml_selectbox</repo>
