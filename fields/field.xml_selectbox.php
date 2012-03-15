@@ -4,8 +4,8 @@
 	require_once(CORE . '/class.cacheable.php');
 	
 	Class fieldXML_Selectbox extends Field {
-		function __construct(&$parent){
-			parent::__construct($parent);
+		function __construct(){
+			parent::__construct();
 			$this->_name = __('XML Select Box');
 			$this->set('show_column', 'no');		
 		}
@@ -202,11 +202,8 @@
 			if($this->get('cache') != '') $fields['cache'] = $this->get('cache');
 			$fields['allow_multiple_selection'] = ($this->get('allow_multiple_selection') ? $this->get('allow_multiple_selection') : 'no');
 
-			$this->Database->query("DELETE FROM `tbl_fields_".$this->handle()."` WHERE `field_id` = '$id' LIMIT 1");
-			
-			if(!$this->Database->insert($fields, 'tbl_fields_' . $this->handle())) return false;
-			
-			return true;
+			Symphony::Database()->query("DELETE FROM `tbl_fields_".$this->handle()."` WHERE `field_id` = '$id' LIMIT 1");
+			return Symphony::Database()->insert($fields, 'tbl_fields_' . $this->handle());
 					
 		}
 		
@@ -250,7 +247,7 @@
 			$div = new XMLElement('div', NULL, array('class' => 'group'));
 			
 			$label = Widget::Label();
-			$input = Widget::Input('fields['.$this->get('sortorder').'][cache]', max(0, intval($this->get('cache'))), NULL, array('size' => '6'));
+			$input = Widget::Input('fields['.$this->get('sortorder').'][cache]', (string)max(0, intval($this->get('cache'))), 'text', array('size' => '6'));
 			$label->setValue('Update cached result every ' . $input->generate() . ' minutes');
 			if(isset($this->_errors[$this->get('sortorder')]['cache'])) $div->appendChild(Widget::wrapFormElementWithError($label, $this->_errors[$this->get('sortorder')]['cache']));
 			else $div->appendChild($label);
@@ -270,7 +267,7 @@
 		}
 		
 		function createTable(){
-			return $this->_engine->Database->query(
+			return Symphony::Database()->query(
 				"CREATE TABLE IF NOT EXISTS `tbl_entries_data_" . $this->get('id') . "` (
 				  `id` int(11) unsigned NOT NULL auto_increment,
 				  `entry_id` int(11) unsigned NOT NULL,

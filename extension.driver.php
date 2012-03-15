@@ -1,20 +1,11 @@
 <?php
 
 	Class extension_xml_selectbox extends Extension{
-	
-		public function about(){
-			return array('name' => 'Field: XML Select Box',
-						 'version' => '0.3.4',
-						 'release-date' => '2011-02-07',
-						 'author' => array('name' => 'Nick Dunn',
-										   'website' => 'http://nick-dunn.co.uk')
-				 		);
-		}
 		
 		public function uninstall(){
 			Symphony::Database()->query("DROP TABLE `tbl_fields_xml_selectbox`");
 		}
-
+		
 		public function install(){
 			return Symphony::Database()->query("CREATE TABLE `tbl_fields_xml_selectbox` (
 			  `id` int(11) NOT NULL auto_increment,
@@ -28,6 +19,5 @@
 			  PRIMARY KEY (`id`)
 			) TYPE=MyISAM");
 		}
-			
+		
 	}
-
