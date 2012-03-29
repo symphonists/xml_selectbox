@@ -219,12 +219,20 @@
 			$label = Widget::Label(__('XML Location'));
 			$input = Widget::Input('fields['.$this->get('sortorder').'][xml_location]', General::sanitize($this->get('xml_location')));
 			$label->appendChild($input);
-			$div->appendChild($label);
+			if(isset($errors['xml_location'])) {
+				$div->appendChild(Widget::Error($label, $errors['xml_location']));
+			} else {
+				$div->appendChild($label);
+			}
 			
 			$label = Widget::Label(__('Item (XPath)'));
 			$input = Widget::Input('fields['.$this->get('sortorder').'][item_xpath]', General::sanitize($this->get('item_xpath')));
 			$label->appendChild($input);
-			$div->appendChild($label);
+			if(isset($errors['item_xpath'])) {
+				$div->appendChild(Widget::Error($label, $errors['item_xpath']));
+			} else {
+				$div->appendChild($label);
+			}
 			
 			$wrapper->appendChild($div);
 			
@@ -239,7 +247,11 @@
 			$label = Widget::Label(__('Label (XPath)'));
 			$input = Widget::Input('fields['.$this->get('sortorder').'][text_xpath]', General::sanitize($this->get('text_xpath')));
 			$label->appendChild($input);
-			$div->appendChild($label);
+			if(isset($errors['text_xpath'])) {
+				$div->appendChild(Widget::Error($label, $errors['text_xpath']));
+			} else {
+				$div->appendChild($label);
+			}
 			
 			$wrapper->appendChild($div);
 			
@@ -264,6 +276,24 @@
 			
 			$this->appendShowColumnCheckbox($wrapper);
 						
+		}
+		
+		function checkFields(array &$errors, $checkForDuplicates = true) {
+			parent::checkFields($errors, $checkForDuplicates);
+			
+			if (trim($this->get('xml_location')) === '') {
+				$errors['xml_location'] = __('This is a required field.');
+			}
+			
+			if (trim($this->get('item_xpath')) === '') {
+				$errors['item_xpath'] = __('This is a required field.');
+			}
+			
+			if (trim($this->get('text_xpath')) === '') {
+				$errors['text_xpath'] = __('This is a required field.');
+			}
+			
+			return (!empty($errors) ? self::__ERROR__ : self::__OK__);
 		}
 		
 		function createTable(){
