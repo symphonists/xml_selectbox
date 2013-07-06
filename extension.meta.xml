@@ -2,12 +2,15 @@
 <extension id="xml_selectbox" status="released" xmlns="http://symphony-cms.com/schemas/extension/1.0">
 	<name>XML Select Box</name>
 	<description>A select box populated from an XML file.</description>
-	<repo type="github">https://github.com/nickdunn/xml_selectbox</repo>
+	<repo type="github">https://github.com/symphonists/xml_selectbox</repo>
 	<url type="discuss">http://symphony-cms.com/discuss/thread/25813/</url>
 	<types>
 		<type>Field Types</type>
 	</types>
 	<authors>
+		<author>
+	        	<name github="symphonists" symphony="community">Symphony Community</name>
+    		</author>
 		<author>
 			<name github="nickdunn" symphony="nickdunn">Nick Dunn</name>
 			<website>http://nick-dunn.co.uk</website>
